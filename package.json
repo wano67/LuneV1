@@ -1,0 +1,38 @@
+{
+  "scripts": {
+    "test:db": "ts-node -r tsconfig-paths/register src/test/test-db.ts",
+    "test:ownership": "ts-node -r tsconfig-paths/register src/test/test-ownership.ts",
+    "test:shared": "ts-node -r tsconfig-paths/register src/test/test-shared-expenses.ts",
+    "test:quotes": "ts-node -r tsconfig-paths/register src/test/test-quotes.ts",
+    "test:forecast": "ts-node -r tsconfig-paths/register src/test/test-forecast.ts",
+    "test:planner": "ts-node -r tsconfig-paths/register src/test/test-planner.ts",
+    "test:insights": "ts-node -r tsconfig-paths/register src/test/test-insights.ts",
+    "test:project-clients": "ts-node -r tsconfig-paths/register src/test/test-project-clients.ts",
+    "test:db:all": "npm run test:db && npm run test:ownership && npm run test:shared && npm run test:quotes && npm run test:forecast && npm run test:planner && npm run test:insights && npm run test:project-clients && npm run test:invoices",
+    "dev:api": "ts-node -r tsconfig-paths/register src/api/server.ts",
+    "test:invoices": "ts-node -r tsconfig-paths/register src/test/test-invoices.ts"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/pg": "^8.15.6",
+    "prisma": "^7.0.1",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@fastify/cookie": "^11.0.2",
+    "@fastify/cors": "^10.1.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/swagger": "^9.6.1",
+    "@fastify/swagger-ui": "^5.2.3",
+    "@prisma/adapter-pg": "^7.0.1",
+    "@prisma/client": "^7.0.1",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.6.2",
+    "fastify-type-provider-zod": "^6.1.0",
+    "pg": "^8.16.3",
+    "react-hot-toast": "^2.6.0",
+    "zod": "^4.1.5"
+  }
+}

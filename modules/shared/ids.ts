@@ -1,0 +1,31 @@
+export type UserId = number | bigint;
+export type BusinessId = number | bigint;
+export type AccountId = number | bigint;
+export type TransactionId = number | bigint;
+export type BudgetId = number | bigint;
+export type BudgetLineId = number | bigint;
+export type SavingsGoalId = number | bigint;
+export type CategoryId = number | bigint;
+export type ClientId = number | bigint;
+export type ServiceId = number | bigint;
+export type ProjectId = number | bigint;
+export type ProjectTaskId = number | bigint;
+export type ProjectMilestoneId = number | bigint;
+export type ProjectServiceId = number | bigint;
+
+const toBigInt = (value: number | bigint): bigint => (typeof value === 'bigint' ? value : BigInt(value));
+
+export const normalizeUserId = (id: UserId): bigint => toBigInt(id);
+export const normalizeBusinessId = (id: BusinessId): bigint => toBigInt(id);
+export const normalizeAccountId = (id: AccountId): bigint => toBigInt(id);
+export const normalizeTransactionId = (id: TransactionId): bigint => toBigInt(id);
+export const normalizeBudgetId = (id: BudgetId): bigint => toBigInt(id);
+export const normalizeBudgetLineId = (id: BudgetLineId): bigint => toBigInt(id);
+export const normalizeSavingsGoalId = (id: SavingsGoalId): bigint => toBigInt(id);
+export const normalizeCategoryId = (id: CategoryId): bigint => toBigInt(id);
+export const normalizeClientId = (id: ClientId): bigint => toBigInt(id);
+export const normalizeServiceId = (id: ServiceId): bigint => toBigInt(id);
+export const normalizeProjectId = (id: ProjectId): bigint => toBigInt(id);
+export const normalizeProjectTaskId = (id: ProjectTaskId): bigint => toBigInt(id);
+export const normalizeProjectMilestoneId = (id: ProjectMilestoneId): bigint => toBigInt(id);
+export const normalizeProjectServiceId = (id: ProjectServiceId): bigint => toBigInt(id);

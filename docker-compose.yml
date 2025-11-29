@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: lune_dev
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    # If host 5432 is already used, map to 5433 to avoid conflicts
+    ports:
+      - "5433:5432"
+
+  backend:
+    image: node:20
+    working_dir: /app
+    volumes:
+      - ./:/app:cached
+      - /app/node_modules
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/lune_dev
+      NODE_ENV: development
+      PORT: 3001
+    # Use 3002 on host to reduce chance of local port conflicts
+    ports:
+      - "3002:3001"
+    depends_on:
+      - db
+    # Ensure Prisma client is generated before running ts-node
+    command: sh -c "npm ci && npx prisma generate && npm run dev:api"
+
+  web:
+    image: node:20
+    working_dir: /app/web
+    volumes:
+      - ./apps/web:/app/web:cached
+      - /app/web/node_modules
+    environment:
+      # Client-side should call the backend on the host (browser runs on host)
+      NEXT_PUBLIC_API_BASE_URL: http://localhost:3002
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      # Use 3001 on host to reduce chance of local conflicts
+      - "3001:3000"
+    depends_on:
+      - backend
+    command: sh -c "cd /app/web && npm ci && npm run dev"
+
+volumes:
+  # Persist Postgres data and avoid node_modules conflicts
+  pgdata: {}
